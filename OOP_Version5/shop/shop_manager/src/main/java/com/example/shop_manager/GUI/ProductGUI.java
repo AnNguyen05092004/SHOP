@@ -122,6 +122,11 @@ public class ProductGUI extends JPanel {
             int quantity = Integer.parseInt(txtQuantity.getText().trim());
 
             Product product = new Product(0, name, category, price, quantity);
+            while (productResponse.isExistProduct(product)) {
+                JOptionPane.showMessageDialog(table,"This product is already exist. Please add a new one.");
+                product.setName(JOptionPane.showInputDialog(table, "Enter Product Name:"));
+            }
+
             if (productResponse.addProduct(product)) {
                 model.addRow(new Object[]{product.getId(), product.getName(), product.getCategory(),
                         product.getPrice(), product.getQuantity()});
@@ -131,7 +136,7 @@ public class ProductGUI extends JPanel {
                 JOptionPane.showMessageDialog(this, "Failed to add product.");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+
         }
     }
 

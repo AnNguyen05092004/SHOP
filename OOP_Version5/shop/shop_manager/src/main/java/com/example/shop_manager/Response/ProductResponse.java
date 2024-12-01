@@ -92,4 +92,20 @@ public class ProductResponse {
             return statement.executeUpdate() > 0;
         }
     }
+
+    public boolean isExistProduct(Product product) throws SQLException {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "SELECT * FROM Product WHERE name = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, product.getName());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        }
+        catch (SQLException e) {
+
+        }
+        return false;
+    }
 }
