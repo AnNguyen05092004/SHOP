@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ReportGUI extends JPanel {
-    private JTextField txtCustomerID, txtOrderID;
+    private JTextField txtCustomerID;
     private JTable table;
     private DefaultTableModel model;
     private JLabel lblTotalAmount;
@@ -51,19 +51,9 @@ public class ReportGUI extends JPanel {
         });
         panelRow2.add(btnSearchInvoices);
 
-        panelRow2.add(new JLabel("Enter Order ID:"));
-        txtOrderID = new JTextField(10);
-        panelRow2.add(txtOrderID);
-        JButton btnSearchByOrderID = new JButton("Search by Order ID");
-        btnSearchByOrderID.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchInvoicesByOrderID();
-            }
-        });
-        panelRow2.add(btnSearchByOrderID);
         lblTotalAmount = new JLabel("Total Amount: 0.0");
         panelRow2.add(lblTotalAmount);
+
         controlPanel.add(panelRow1);
         controlPanel.add(panelRow2);
         add(controlPanel, BorderLayout.SOUTH);
@@ -89,20 +79,6 @@ public class ReportGUI extends JPanel {
             updateTable(invoices);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error fetching invoices by Customer ID: " + ex.getMessage());
-        }
-    }
-
-    private void searchInvoicesByOrderID() {
-        String orderID = txtOrderID.getText().trim();
-        if (orderID.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter an Order ID.");
-            return;
-        }
-        try {
-            List<Object[]> invoices = reportResponse.fetchInvoicesByOrderID(orderID);
-            updateTable(invoices);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error fetching invoices by Order ID: " + ex.getMessage());
         }
     }
 
