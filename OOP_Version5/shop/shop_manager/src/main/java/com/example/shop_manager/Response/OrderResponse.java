@@ -69,7 +69,7 @@ public class OrderResponse {
                             insertOrderStmt.setString(1, orderId);
                             insertOrderStmt.executeUpdate();
                         }
-                        JOptionPane.showMessageDialog(null, "Updated Order successfully.");
+                        JOptionPane.showMessageDialog(null, " Order added successfully !");
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Order ID is already in use.");
@@ -131,8 +131,6 @@ public class OrderResponse {
                     }
                 }
             }
-
-            JOptionPane.showMessageDialog(null, "Order added successfully!");
         } catch (Exception e) {
             e.printStackTrace();
         }

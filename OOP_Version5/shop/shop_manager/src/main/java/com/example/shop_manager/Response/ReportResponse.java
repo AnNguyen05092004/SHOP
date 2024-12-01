@@ -119,7 +119,7 @@ public class ReportResponse {
                             resultSet.getInt("quantity"),
                             resultSet.getDouble("total")
                     };
-                    
+
                     invoices.add(row);
                 }
             }
